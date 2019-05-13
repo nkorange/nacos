@@ -19,6 +19,7 @@ package com.alibaba.nacos;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -29,7 +30,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class Nacos {
 
+    private static ConfigurableApplicationContext applicationContext;
+
+    public static ConfigurableApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
     public static void main(String[] args) {
-        SpringApplication.run(Nacos.class, args);
+        applicationContext = SpringApplication.run(Nacos.class, args);
     }
 }
