@@ -71,6 +71,9 @@
             <relocation>
               <pattern>org.apache</pattern>
               <shadedPattern>com.alibaba.nacos.org.apache</shadedPattern>
+              <excludes>
+                <exclude>org.apache.http.annotation.*</exclude>
+              </excludes>
             </relocation>
             <relocation>
               <pattern>org.aspectj</pattern>
@@ -103,6 +106,9 @@
             <relocation>
               <pattern>org.jboss</pattern>
               <shadedPattern>com.alibaba.nacos.org.jboss</shadedPattern>
+              <excludes>
+                <exclude>org.jboss.logging.annotations.*</exclude>
+              </excludes>
             </relocation>
             <relocation>
               <pattern>org.latencyutils</pattern>
@@ -127,6 +133,9 @@
             <relocation>
               <pattern>org.springframework</pattern>
               <shadedPattern>com.alibaba.nacos.org.springframework</shadedPattern>
+              <excludes>
+                <exclude>org.springframework.hateoas.*</exclude>
+              </excludes>
             </relocation>
             <relocation>
               <pattern>org.xmlunit</pattern>

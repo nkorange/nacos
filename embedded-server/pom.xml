@@ -28,6 +28,26 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>nacos-console</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-couchbase</artifactId>
+            <version>3.2.0.M3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jdbc</artifactId>
+            <version>1.1.0.M3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+            <version>5.2.0.M2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-mongodb</artifactId>
+            <version>2.2.0.M2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -57,6 +77,7 @@
                             <exclude>org.apache.logging.log4j:log4j-api</exclude>
                             <exclude>javax.annotation:*</exclude>
                             <exclude>javax.validation:*</exclude>
+<!--                            <exclude>org.springframework.data:spring-data-couchbase</exclude>-->
                         </excludes>
                     </artifactSet>
                     <relocations>
@@ -87,6 +108,9 @@
                         <relocation>
                             <pattern>org.apache</pattern>
                             <shadedPattern>com.alibaba.nacos.org.apache</shadedPattern>
+                            <excludes>
+                                <exclude>org.apache.http.annotation.*</exclude>
+                            </excludes>
                         </relocation>
                         <relocation>
                             <pattern>org.aspectj</pattern>
@@ -119,6 +143,9 @@
                         <relocation>
                             <pattern>org.jboss</pattern>
                             <shadedPattern>com.alibaba.nacos.org.jboss</shadedPattern>
+                            <excludes>
+                                <exclude>org.jboss.logging.annotations.*</exclude>
+                            </excludes>
                         </relocation>
                         <relocation>
                             <pattern>org.latencyutils</pattern>
@@ -143,6 +170,10 @@
                         <relocation>
                             <pattern>org.springframework</pattern>
                             <shadedPattern>com.alibaba.nacos.org.springframework</shadedPattern>
+                            <excludes>
+<!--                                <exclude>org.springframework.data.*</exclude>-->
+                                <exclude>org.springframework.hateoas.*</exclude>
+                            </excludes>
                         </relocation>
                         <relocation>
                             <pattern>org.xmlunit</pattern>
