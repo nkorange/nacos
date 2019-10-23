@@ -75,11 +75,11 @@ public class AuthController {
             String token = jwtTokenUtils.createToken(authentication);
             //将Token写入到Http头部
             response.addHeader(WebSecurityConfig.AUTHORIZATION_HEADER, "Bearer " + token);
-            rr.setCode(200);
+            rr.setCode(HttpServletResponse.SC_OK);
             rr.setData("Bearer " + token);
             return rr;
         } catch (BadCredentialsException authentication) {
-            rr.setCode(401);
+            rr.setCode(HttpServletResponse.SC_UNAUTHORIZED);
             rr.setMessage("Login failed");
             return rr;
         }
@@ -101,10 +101,10 @@ public class AuthController {
         try {
             if (PasswordEncoderUtil.matches(oldPassword, password)) {
                 userDetailsService.updateUserPassword(username, PasswordEncoderUtil.encode(newPassword));
-                rr.setCode(200);
+                rr.setCode(HttpServletResponse.SC_OK);
                 rr.setMessage("Update password success");
             } else {
-                rr.setCode(401);
+                rr.setCode(HttpServletResponse.SC_UNAUTHORIZED);
                 rr.setMessage("Old password is invalid");
             }
         } catch (Exception e) {
