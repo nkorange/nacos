@@ -35,4 +35,6 @@ public class PreservedMetadataKeys {
     public static final String HEART_BEAT_INTERVAL = "preserved.heart.beat.interval";
 
     public static final String INSTANCE_ID_GENERATOR = "preserved.instance.id.generator";
+
+    public static final String ENVIRONMENT_ALICLOUD_PREFIX = "preserved.env.alicloud.";
 }

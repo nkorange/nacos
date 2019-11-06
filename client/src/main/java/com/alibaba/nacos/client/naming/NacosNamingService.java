@@ -25,6 +25,7 @@ import com.alibaba.nacos.api.naming.pojo.ListView;
 import com.alibaba.nacos.api.naming.pojo.ServiceInfo;
 import com.alibaba.nacos.api.naming.utils.NamingUtils;
 import com.alibaba.nacos.api.selector.AbstractSelector;
+import com.alibaba.nacos.client.alicloud.AliCloudManager;
 import com.alibaba.nacos.client.naming.beat.BeatInfo;
 import com.alibaba.nacos.client.naming.beat.BeatReactor;
 import com.alibaba.nacos.client.naming.core.Balancer;
@@ -190,6 +191,10 @@ public class NacosNamingService implements NamingService {
     public void registerInstance(String serviceName, String groupName, Instance instance) throws NacosException {
 
         if (instance.isEphemeral()) {
+
+            // inject alicloud environment variables:
+            instance.addAllMetadata(AliCloudManager.getEnvironmentInfo());
+
             BeatInfo beatInfo = new BeatInfo();
             beatInfo.setServiceName(NamingUtils.getGroupedName(serviceName, groupName));
             beatInfo.setIp(instance.getIp());

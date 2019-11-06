@@ -155,6 +155,13 @@ public class Instance {
         this.metadata.put(key, value);
     }
 
+    public void addAllMetadata(Map<String, String> metadata) {
+        if (this.metadata == null) {
+            this.metadata = new HashMap<String, String>(4);
+        }
+        this.metadata.putAll(metadata);
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
