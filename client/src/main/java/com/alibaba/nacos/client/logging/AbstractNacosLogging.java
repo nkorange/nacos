@@ -15,6 +15,7 @@
  */
 package com.alibaba.nacos.client.logging;
 
+import ch.qos.logback.classic.LoggerContext;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,5 +59,5 @@ public abstract class AbstractNacosLogging {
     /**
      * Load logging configuration
      */
-    public abstract void loadConfiguration();
+    public abstract Object loadConfiguration();
 }

@@ -33,15 +33,17 @@ public class LogbackNacosLogging extends AbstractNacosLogging {
     private static final String NACOS_LOGBACK_LOCATION = "classpath:nacos-logback.xml";
 
     @Override
-    public void loadConfiguration() {
+    public LoggerContext loadConfiguration() {
         String location = getLocation(NACOS_LOGBACK_LOCATION);
         if (StringUtils.isBlank(location)) {
-            return;
+            return null;
         }
 
         try {
             LoggerContext loggerContext = (LoggerContext)StaticLoggerBinder.getSingleton().getLoggerFactory();
-            new ContextInitializer(loggerContext).configureByResource(ResourceUtils.getResourceURL(location));
+            ContextInitializer contextInitializer = new ContextInitializer(loggerContext);
+            contextInitializer.configureByResource(ResourceUtils.getResourceURL(location));
+            return loggerContext;
         } catch (Exception e) {
             throw new IllegalStateException("Could not initialize Logback Nacos logging from " + location, e);
         }

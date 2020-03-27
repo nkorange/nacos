@@ -18,7 +18,9 @@ package com.alibaba.nacos.client.utils;
 import com.alibaba.nacos.client.logging.AbstractNacosLogging;
 import com.alibaba.nacos.client.logging.log4j2.Log4J2NacosLogging;
 import com.alibaba.nacos.client.logging.logback.LogbackNacosLogging;
+import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -29,6 +31,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class LogUtils {
 
     public static final Logger NAMING_LOGGER;
+
+    private static ILoggerFactory iLoggerFactory = LoggerFactory.getILoggerFactory();
 
     static {
         try {
@@ -44,7 +48,9 @@ public class LogUtils {
             }
 
             try {
-                nacosLogging.loadConfiguration();
+
+                iLoggerFactory = (ILoggerFactory) nacosLogging.loadConfiguration();
+
             } catch (Throwable t) {
                 if (isLogback) {
                     getLogger(LogUtils.class).warn("Load Logback Configuration of Nacos fail, message: {}",
@@ -58,7 +64,7 @@ public class LogUtils {
             getLogger(LogUtils.class).warn("Init Nacos Logging fail, message: {}", t1.getMessage());
         }
 
-        NAMING_LOGGER = getLogger("com.alibaba.nacos.client.naming");
+        NAMING_LOGGER = iLoggerFactory.getLogger("com.alibaba.nacos.client.naming");
     }
 
     public static Logger logger(Class<?> clazz) {
